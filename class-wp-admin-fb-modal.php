@@ -17,27 +17,35 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 
 	class WP_Admin_FB_Modal {
 
-		public $plugin_slug = ''; // TODO: The text domain of the plugin would be best.
+		public static $plugin_slug = '';
 
-		public $plugin_name = ''; // TODO: Set the name of the plugin.
+		public static $plugin_name = '';
 
-		public $email = "feedback@yourdomain.xyz"; // TODO: Set the email address you wish to send the feedback to.
+		public static $plugin_file = '';
+
+		public static $email       = '';
 
 		/**
-		 * Constructor
+		 * Initialize the Feedback Modal.
 		 *
 		 * @access public
+		 * @static
+		 * @param string $plugin_slug
+		 * @param string $plugin_name
+		 * @param string $plugin_file
+		 * @param string $email
 		 */
-		public function __construct( $plugin_slug, $plugin_name, $email ) {
-			$this->plugin_slug = str_replace( '-', '_', $plugin_slug );
-			$this->plugin_name = $plugin_name;
-			$this->email       = $email;
+		public static function init( $plugin_slug, $plugin_name, $plugin_file, $email ) {
+			self::$plugin_slug = str_replace( '-', '_', $plugin_slug );
+			self::$plugin_name = $plugin_name;
+			self::$plugin_file = $plugin_file;
+			self::$email       = $email;
 
-			include( dirname( __FILE__ ) . '/class-admin-assets.php' ); // Modal Assets
+			include_once( dirname( __FILE__ ) . '/class-wp-admin-fb-modal-assets.php' ); // Modal Assets
 
-			add_action( 'wp_ajax_wp_admin_fb_modal_' . $this->plugin_slug, array( $this, 'ajax_feedback_modal' ) );
-			add_action( 'admin_footer', array( $this, 'deactivation_modal' ), 9999 );
-		} // END __construct()
+			add_action( 'wp_ajax_wp_admin_fb_modal_' . self::$plugin_slug, array( __CLASS__, 'ajax_feedback_modal' ) );
+			add_action( 'admin_footer', array( __CLASS__, 'deactivation_modal' ), 9999 );
+		} // END init()
 
 		/**
 		 * Sends feedback details from deactivation modal via email.
@@ -52,8 +60,8 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 			$userdata = get_userdata( $user_id );
 
 			$from     = get_option('admin_email');
-			$send_to  = sanitize_email( $this->email );
-			$subject  = sprintf( __( 'Customer Deactivated %s' ), $this->plugin_name );
+			$send_to  = sanitize_email( self::$email );
+			$subject  = sprintf( __( 'Customer Deactivated %s' ), self::$plugin_name );
 
 			$message  = '<strong>' . __( 'Reason:' ) . '</strong> ' . $reason;
 
@@ -79,11 +87,12 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 		 * Includes the deactivation modal.
 		 * 
 		 * @access public
+		 * @static
 		 */
-		public function deactivation_modal() {
-			$plugin_slug = $this->plugin_slug;
-			$plugin_file = plugin_basename( __FILE__ ); // TODO: Change __FILE__ with the file of the main plugin.
-			$plugin_name = $this->plugin_name;
+		public static function deactivation_modal() {
+			$plugin_slug = str_replace( '_', '-', self::$plugin_slug );
+			$plugin_file = plugin_basename( self::$plugin_file );
+			$plugin_name = self::$plugin_name;
 
 			include_once( dirname( __FILE__ ) . '/views/html-modal-deactivation.php' );
 		} // END deactivation_modal()
@@ -92,4 +101,4 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 
 } // END if class exists
 
-return new WP_Admin_FB_Modal();
+$wp_admin_fb_modal = new WP_Admin_FB_Modal();

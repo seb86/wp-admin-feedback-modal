@@ -1,7 +1,7 @@
 var $ = jQuery;
 
 $(document).ready( function( ) {
-	var $modal = $('.wp-admin-fb-modal.' + plugin_slug);
+	var $modal = $('.wp-admin-fb-modal.' + wp_admin_fb_modal_params.plugin_slug);
 
 	if ( $modal ) {
 		new Modal($modal);
@@ -18,7 +18,7 @@ $(document).ready( function( ) {
 		e.preventDefault();
 
 		$.post( $("#wp_admin_fb_modal_ajax_url").val(), {
-			action: 'wp_admin_fb_modal_' + plugin_slug,
+			action: 'wp_admin_fb_modal_' + wp_admin_fb_modal_params.plugin_slug,
 			fb_reason: reason,
 			fb_details: details,
 		} ).done( function( response ) {
@@ -41,7 +41,7 @@ function Modal(aElem) {
 	this.radio         = $('input[name=reason]', aElem);
 	this.closer        = $('.close, .cancel', aElem);
 	this.return        = $('.return', aElem);
-	this.opener        = $('.plugins [data-slug="' + plugin_slug + '"] .deactivate');
+	this.opener        = $('.plugins [data-slug="' + wp_admin_fb_modal_params.plugin_slug + '"] .deactivate');
 	this.question      = $('.question', aElem);
 	this.button        = $('.button-primary', aElem);
 	this.title         = $('.header h2', aElem);
