@@ -33,36 +33,6 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
  * 		),
  * )
  */
-$responses = array(
-	array(
-		'id'           => 'too-complicated',
-		'value'        => __( 'Too Complicated' ),
-		'label'        => sprintf( __( 'The plugin is %1$stoo complicated to configure.%2$s' ), '<strong>', '</strong>' ),
-		'hidden_field' => 'no',
-		'reason'       => array(
-			'title'   => __( 'The plugin is too complicated to configure.' ),
-			'content' => '<p>' . __( 'I\'m sorry to hear you are finding it difficult to use.' ) . '</p>'
-		),
-	),
-	array(
-		'id'           => 'with-external-button',
-		'value'        => __( 'This option has a button' ),
-		'label'        => __( 'I\'m struggerling to get the plugin working.' ),
-		'hidden_field' => 'no',
-		'reason'       => array(
-			'title'   => __( 'This option has a button.' ),
-			'content' => '<p>' . __( 'Your content goes here.' ) . '</p>' .
-						'<div class="text-center"><a class="external-button" href="' . esc_url( 'https://github.com/seb86/wp-admin-feedback-modal' ) . '" target="_blank">' . __( 'Button Text' ) . '</a></div>',
-		),
-	),
-	array(
-		'id'                 => 'another-plugin',
-		'value'              => __( 'Another Plugin' ),
-		'label'              => __( 'I\'m using another plugin I find better.' ),
-		'hidden_field'       => 'yes',
-		'hidden_placeholder' => __( 'What is the name of this plugin?' ),
-	)
-);
 ?>
 <!-- Start of WP Admin Feedback Modal -->
 <div class="wp-admin-fb-modal <?php echo $plugin_slug; ?>">

@@ -25,6 +25,8 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 
 		public static $email       = '';
 
+		public static $responses   = array();
+
 		/**
 		 * Initialize the Feedback Modal.
 		 *
@@ -34,12 +36,14 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 		 * @param string $plugin_name
 		 * @param string $plugin_file
 		 * @param string $email
+		 * @param array  $responses
 		 */
-		public static function init( $plugin_slug, $plugin_name, $plugin_file, $email ) {
+		public static function init( $plugin_slug, $plugin_name, $plugin_file, $email, $responses ) {
 			self::$plugin_slug = str_replace( '-', '_', $plugin_slug );
 			self::$plugin_name = $plugin_name;
 			self::$plugin_file = $plugin_file;
 			self::$email       = $email;
+			self::$responses   = $responses;
 
 			include_once( dirname( __FILE__ ) . '/class-wp-admin-fb-modal-assets.php' ); // Modal Assets
 
@@ -93,6 +97,7 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 			$plugin_slug = str_replace( '_', '-', self::$plugin_slug );
 			$plugin_file = plugin_basename( self::$plugin_file );
 			$plugin_name = self::$plugin_name;
+			$responses   = self::$responses;
 
 			include_once( dirname( __FILE__ ) . '/views/html-modal-deactivation.php' );
 		} // END deactivation_modal()
