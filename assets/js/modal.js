@@ -13,14 +13,19 @@ $(document).ready( function( ) {
 	$('#send-deactivation').on('click', function(e) {
 		var reason           = $('#reason').val();
 		var details          = $('#details').val();
+		var email            = $('#email').val();
+		var permission       = $('#permission').val();
 		var deactivation_url = $(this).attr("href");
 
 		e.preventDefault();
 
 		$.post( $("#wp_admin_fb_modal_ajax_url").val(), {
 			action: 'wp_admin_fb_modal_' + wp_admin_fb_modal_params.plugin_slug,
+			ajax_nonce: wp_admin_fb_modal_params.nonce,
 			fb_reason: reason,
 			fb_details: details,
+			fb_email: email,
+			fb_permission_granted: permission,
 		} ).done( function( response ) {
 			if ( ! response ) {
 				console.log( 'No response!' );

@@ -100,6 +100,14 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 		</div>
 		<a href="<?php echo esc_attr( $deactivation_url ); ?>" class="button button-secondary"><?php _e( 'Skip & Deactivate' ); ?></a>
 
+		<p><a href="#"><?php _e( 'What will I be sending?' ); ?></a></p>	
+		<div class="whats-sent">
+			<ul>
+				<li><?php _e( 'Your profile name and the email address you provide.' ); ?></li>
+				<li><?php _e( 'Your site url, WP version, PHP info, active plugins and theme.' ); ?></li>
+			</ul>
+		</div>
+
 		<input type="hidden" id="wp_admin_fb_modal_ajax_url" value="<?php echo admin_url( 'admin-ajax.php' ); ?>" />
 	</div>
 

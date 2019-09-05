@@ -65,6 +65,7 @@ if ( ! class_exists( 'WP_Admin_FB_Modal_Assets' ) ) {
 
 				// Variables for the JavaScript
 				wp_localize_script( 'wp_admin_fb_modal', 'wp_admin_fb_modal_params', array(
+					'nonce'       => wp_create_nonce( 'wp-admin-feedback-modal-ajax' ),
 					'plugin_slug' => self::$plugin_slug,
 				) );
 			}
