@@ -123,7 +123,7 @@ if ( ! class_exists( 'WP_Admin_FB_Modal_Example' ) ) {
 				array(
 					'id'           => 'with-external-button',
 					'value'        => __( 'This option has a button' ),
-					'label'        => __( 'I\'m struggerling to get the plugin working.' ),
+					'label'        => __( 'I\'m struggling to get the plugin working.' ),
 					'hidden_field' => 'no',
 					'reason'       => array(
 						'title'   => __( 'This option has a button.' ),
