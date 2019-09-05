@@ -25,7 +25,7 @@ It displays a modal when a user deactivates your WordPress plugin and displays a
 
 ![Modal Example](https://raw.githubusercontent.com/seb86/wp-admin-feedback-modal/master/screenshot.png)
 
-Once the user has selected from your list of responses, the modal can display a ready response if one exists. Below the primary button is then enabled to send the reason for deactivating the plugin.
+Once the user has selected from your list of responses, the modal can display a ready response if one exists. Below the primary button is then enabled to send the reason for deactivating the plugin. Should the user grant permission, details about the site is also shared.
 
 The two other options allow the user to cancel deactivation or deactivate the plugin without sending feedback.
 
@@ -33,7 +33,7 @@ To see a live example, download the repository and activate the example plugin p
 
 What you will see are just a few examples. You can change the responses to what ever you like. Only the first and last option will be there by default.
 
-Feedback is sent via email but you are welcome to fork the project and change it to send maybe to your private Slack channel for example. It's up to you how the feedback is sent.
+By default, the class sends the feedback via email but you can unhook this method and hook in your own send method. Maybe to send it to a private Slack channel for example. It's up to you how the feedback is sent.
 
 ## 📘 Guide
 
@@ -45,11 +45,11 @@ First step is to load the class into your plugin. This would typically appear in
 
 ```php
 if ( class_exists( 'WP_Admin_FB_Modal' ) ) {
-	$wp_admin_fb_modal->init( 'plugin-slug', 'Plugin Name', __FILE__, 'feedback@yourdomain.xyz', $responses );
+	$wp_admin_fb_modal->init( 'plugin-slug', 'Plugin Name', __FILE__, $responses, 'feedback@yourdomain.xyz' );
 }
 ```
 
-Then you need to replace the parameters passed. Plugin slug, name, the main plugin file and the e-mail address to reveive the feedback.
+Then you need to replace the parameters passed. Plugin slug, plugin name, the main plugin file, responses. The last variable can be anything from an email address to a webhook URL to which the feedback is being sent to.
 
 **Responses**
 
@@ -93,6 +93,14 @@ $responses = array(
 ```
 
 And that's it. Happy coding 😄
+
+## Changing the send method
+
+If you do not wish to send the feedback via email. That's fine. Simply unhook the default method from `wp_admin_fb_modal_sending` action hook.
+
+`remove_action( 'wp_admin_fb_modal_sending', array( 'WP_Admin_FB_Modal', 'send_feedback_via_email' ), 10 );`
+
+Then hook in your own.
 
 ## ⭐ Support
 

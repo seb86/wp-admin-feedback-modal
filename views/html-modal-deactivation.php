@@ -94,16 +94,22 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 	</div>
 
 	<div class="footer">
-		<div>
+		<div class="deactivation-options">
+			<input type="checkbox" name="permission" id="permission" disabled="disabled" /> <label for="grant-permission"><?php _e( 'I grant permission to send my personal data and site details to the developer/s to provide feedback.' ); ?></label>
+
+			<input type="email" name="email" id="email" value="" placeholder="<?php _e( 'Please enter your email address' ); ?>" disabled="disabled">
+
 			<a href="<?php echo esc_attr( $deactivation_url ); ?>" class="button button-primary isDisabled" disabled id="send-deactivation"><?php _e( 'Send Feedback & Deactivate' ); ?></a>
 			<button class="cancel"><?php _e( 'Cancel' ); ?></button>
+			<a href="<?php echo esc_attr( $deactivation_url ); ?>" class="button button-secondary"><?php _e( 'Just Deactivate' ); ?></a>
 		</div>
-		<a href="<?php echo esc_attr( $deactivation_url ); ?>" class="button button-secondary"><?php _e( 'Skip & Deactivate' ); ?></a>
 
-		<p><a href="#"><?php _e( 'What will I be sending?' ); ?></a></p>	
+		<div class="what-will-be-sent"><a href="#"><?php _e( 'What will I be sending?' ); ?></a></div>
+
 		<div class="whats-sent">
+			<p><?php _e( 'If you granted permission and provided an email address the following is sent.' ); ?></p>
 			<ul>
-				<li><?php _e( 'Your profile name and the email address you provide.' ); ?></li>
+				<li><?php _e( 'Your profile name and the email address you provided.' ); ?></li>
 				<li><?php _e( 'Your site url, WP version, PHP info, active plugins and theme.' ); ?></li>
 			</ul>
 		</div>

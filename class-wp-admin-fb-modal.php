@@ -23,7 +23,7 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 
 		public static $plugin_file = '';
 
-		public static $email       = '';
+		public static $other       = '';
 
 		public static $responses   = array();
 
@@ -35,14 +35,14 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 		 * @param string $plugin_slug
 		 * @param string $plugin_name
 		 * @param string $plugin_file
-		 * @param string $email
 		 * @param array  $responses
+		 * @param string $other
 		 */
-		public static function init( $plugin_slug, $plugin_name, $plugin_file, $email, $responses ) {
+		public static function init( $plugin_slug, $plugin_name, $plugin_file, $responses, $other ) {
 			self::$plugin_slug = str_replace( '-', '_', $plugin_slug );
 			self::$plugin_name = $plugin_name;
 			self::$plugin_file = $plugin_file;
-			self::$email       = $email;
+			self::$other       = $other;
 			self::$responses   = $responses;
 
 			include_once( dirname( __FILE__ ) . '/class-wp-admin-fb-modal-assets.php' ); // Modal Assets
@@ -128,7 +128,7 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 		 * @return bool
 		 */
 		public function send_feedback_via_email( $feedback_data ) {
-			$send_to = sanitize_email( self::$email );
+			$send_to = sanitize_email( self::$other );
 			$subject = sprintf( __( 'User Deactivated %s' ), self::$plugin_name );
 
 			$headers = array(
@@ -151,7 +151,7 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 					}
 				}
 			} else {
-				$headers[] = 'From: ' . self::$plugin_name . ' <' . self::$email . '>';
+				$headers[] = 'From: ' . self::$plugin_name . ' <' . self::$other . '>';
 			}
 
 			$email = wp_mail( $send_to, $subject, $message, $headers );

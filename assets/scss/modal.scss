@@ -99,15 +99,42 @@
     }
 
     .footer {
-        display: -webkit-box;
-        display: flex;
+        display: block;
         -webkit-box-align: center;
                 align-items: center;
         -webkit-box-pack: justify;
                 justify-content: space-between;
-        height: 64px;
-        padding: 0 32px;
+        height: auto;
+        padding: 16px 0 0 0;
         background: #F5F5F5;
+
+        div.deactivation-options {
+            padding: 0 32px;
+
+            input[type="email"] {
+                margin: 1em 0;
+                width: 100%;
+            }
+
+            a.button-secondary {
+                float: right;
+            }
+        }
+
+        div.what-will-be-sent {
+            padding: 14px;
+            text-align: center;
+        }
+
+        div.whats-sent {
+            background-color: #c8ebfb;
+            display: none;
+            padding: 8px 32px;
+
+            ul {
+                list-style: disc;
+            }
+        }
     }
 
     .button {

@@ -141,7 +141,11 @@ if ( ! class_exists( 'WP_Admin_FB_Modal_Example' ) ) {
 			);
 
 			if ( class_exists( 'WP_Admin_FB_Modal' ) ) {
-				$wp_admin_fb_modal->init( WP_ADMIN_FB_MODAL_SLUG, 'Plugin Example', __FILE__, 'feedback@yourdomain.xyz', $responses );
+				/**
+				 * Pass data of the plugin and your responses.
+				 * The last variable can be anything from an email address to a webhook URL.
+				 */
+				$wp_admin_fb_modal->init( WP_ADMIN_FB_MODAL_SLUG, 'Plugin Example', __FILE__, $responses, 'feedback@yourdomain.xyz' );
 			}
 
 		} // END admin_includes()

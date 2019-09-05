@@ -68,15 +68,30 @@
     display: -webkit-box;
     display: flex; }
   .wp-admin-fb-modal .footer {
-    display: -webkit-box;
-    display: flex;
+    display: block;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    height: 64px;
-    padding: 0 32px;
+    height: auto;
+    padding: 16px 0 0 0;
     background: #F5F5F5; }
+    .wp-admin-fb-modal .footer div.deactivation-options {
+      padding: 0 32px; }
+      .wp-admin-fb-modal .footer div.deactivation-options input[type="email"] {
+        margin: 1em 0;
+        width: 100%; }
+      .wp-admin-fb-modal .footer div.deactivation-options a.button-secondary {
+        float: right; }
+    .wp-admin-fb-modal .footer div.what-will-be-sent {
+      padding: 14px;
+      text-align: center; }
+    .wp-admin-fb-modal .footer div.whats-sent {
+      background-color: #c8ebfb;
+      display: none;
+      padding: 8px 32px; }
+      .wp-admin-fb-modal .footer div.whats-sent ul {
+        list-style: disc; }
   .wp-admin-fb-modal .button {
     font-weight: 500;
     box-shadow: none;

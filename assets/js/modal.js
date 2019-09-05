@@ -36,6 +36,14 @@ $(document).ready( function( ) {
 			window.location.href=deactivation_url;
 		} );
 	});
+
+	$('.what-will-be-sent a').on('click', function(e) {
+		e.preventDefault();
+
+		var whatsSent = $('.whats-sent');
+
+		whatsSent.toggle();
+	});
 });
 
 function Modal(aElem) {
@@ -54,6 +62,8 @@ function Modal(aElem) {
 	this.hiddenReason  = $('#reason', aElem);
 	this.hiddenDetails = $('#details', aElem);
 	this.titleText     = this.title.text();
+	this.permission    = $('#permission', aElem);
+	this.email         = $('#email', aElem);
 
 	// Open
 	this.opener.click( function() {
@@ -96,10 +106,16 @@ function Modal(aElem) {
 		if ( refThis.hiddenDetails.val() != '' ) {
 			refThis.button.removeClass('isDisabled');
 			refThis.button.removeAttr("disabled");
+
+			refThis.permission.removeAttr("disabled");
+			refThis.email.removeAttr("disabled");
 		}
 		else {
 			refThis.button.addClass('isDisabled');
 			refThis.button.attr("disabled", true);
+
+			refThis.permission.attr("disabled", true);
+			refThis.email.attr("disabled", true);
 		}
 	});
 }
@@ -121,6 +137,9 @@ Modal.prototype.change = function(aElem) {
 
 	this.button.removeClass('isDisabled');
 	this.button.removeAttr("disabled");
+
+	this.permission.removeAttr("disabled");
+	this.email.removeAttr("disabled");
 
 	switch(id) {
 		case 'reason-temporary':
@@ -149,6 +168,9 @@ Modal.prototype.change = function(aElem) {
 
 					refThis.button.addClass('isDisabled');
 					refThis.button.attr("disabled", true);
+
+					refThis.permission.attr("disabled", true);
+					refThis.email.attr("disabled", true);
 				}
 			}
 		break;
@@ -171,8 +193,12 @@ Modal.prototype.returnToQuestion = function() {
 	this.hiddenDetails.val('');
 
 	this.radio.attr('checked', false);
+
 	this.button.addClass('isDisabled');
 	this.button.attr("disabled", true);
+
+	this.permission.attr("disabled", true);
+	this.email.attr("disabled", true);
 };
 
 /**
