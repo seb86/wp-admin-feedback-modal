@@ -170,6 +170,12 @@ if ( ! class_exists( 'WP_Admin_FB_Modal' ) ) {
 		 * @static
 		 */
 		public static function deactivation_modal() {
+			global $pagenow;
+
+			if ( 'plugins.php' !== $pagenow ) {
+				return;
+			}
+
 			$plugin_slug = str_replace( '_', '-', self::$plugin_slug );
 			$plugin_file = plugin_basename( self::$plugin_file );
 			$plugin_name = self::$plugin_name;

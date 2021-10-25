@@ -19,13 +19,16 @@ if ( ! class_exists( 'WP_Admin_FB_Modal_Assets' ) ) {
 
 		public static $plugin_slug = '';
 
+		public static $plugin_file = '';
+
 		/**
 		 * Constructor
 		 *
 		 * @access  public
 		 */
-		public function __construct( $plugin_slug ) {
+		public function __construct( $plugin_slug, $plugin_file ) {
 			self::$plugin_slug = str_replace( '_', '-', $plugin_slug );
+			self::$plugin_file = plugin_basename( $plugin_file );
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_styles' ), 10 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ), 10 );
@@ -67,6 +70,7 @@ if ( ! class_exists( 'WP_Admin_FB_Modal_Assets' ) ) {
 				wp_localize_script( 'wp_admin_fb_modal', 'wp_admin_fb_modal_params', array(
 					'nonce'       => wp_create_nonce( 'wp-admin-feedback-modal-ajax' ),
 					'plugin_slug' => self::$plugin_slug,
+					'plugin_file' => self::$plugin_file,
 				) );
 			}
 		} // END admin_scripts()
@@ -75,4 +79,4 @@ if ( ! class_exists( 'WP_Admin_FB_Modal_Assets' ) ) {
 
 } // END if class exists
 
-return new WP_Admin_FB_Modal_Assets( self::$plugin_slug );
+return new WP_Admin_FB_Modal_Assets( self::$plugin_slug, $plugin_file );

@@ -37,28 +37,26 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 <!-- Start of WP Admin Feedback Modal -->
 <div class="wp-admin-fb-modal <?php echo $plugin_slug; ?>">
 
+	<form action="#" method="post" id="wp-admin-fb-modal-deactivate-form">
+
 	<div class="header">
 		<div>
 			<button class="return icon-arrow-left"><?php _e( 'Return' ); ?></button>
-			<h2><?php echo sprintf( '%s ' . __( 'Feedback' ), $plugin_name ); ?></h2>
+			<h2><?php echo sprintf( __( 'Quick feedback about %s' ), $plugin_name ); ?></h2>
 		</div>
 		<button class="close icon-close"><?php _e( 'Close' ); ?></button>
 	</div>
 
 	<div class="content">
 		<div class="question isOpen">
-			<h3><?php _e( 'May I have a little info about why you are deactivating?' ); ?></h3>
+			<h3><?php _e( 'If you have a moment, please let us know why you are deactivating:' ); ?></h3>
 			<ul>
-				<li>
-					<input type="radio" name="reason" id="reason-temporary" value="<?php __( 'Temporary Deactivation' ); ?>">
-					<label for="reason-temporary"><?php echo sprintf( __( '%1$sIt is a temporary deactivation.%2$s I am just debugging an issue.' ), '<strong>', '</strong>' ); ?></label>
-				</li>
 				<?php
 				// List each additional possible response.
 				foreach ( $responses as $response ) {
 					echo '<li>';
 
-					echo '<input type="radio" name="reason" id="reason-' . $response['id'] . '" value="' . $response['value'] . '">';
+					echo '<input type="radio" name="wp-admin-fb-modal-selected-reason" id="reason-' . $response['id'] . '" value="' . $response['value'] . '">';
 					echo '<label for="reason-' . $response['id'] . '">' . $response['label'] . '</label>';
 
 					if ( $response['hidden_field'] == 'yes' ) {
@@ -69,7 +67,11 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 				}
 				?>
 				<li>
-					<input type="radio" name="reason" id="reason-other" value="<?php __( 'Other' ); ?>">
+					<input type="radio" name="wp-admin-fb-modal-selected-reason" id="reason-temporary" value="<?php _e( 'Temporary Deactivation' ); ?>">
+					<label for="reason-temporary"><?php echo sprintf( __( '%1$sIt is a temporary deactivation.%2$s I am just debugging an issue.' ), '<strong>', '</strong>' ); ?></label>
+				</li>
+				<li>
+					<input type="radio" name="wp-admin-fb-modal-selected-reason" id="reason-other" value="<?php _e( 'Other' ); ?>">
 					<label for="reason-other"><?php _e( 'Other' ); ?></label>
 					<div class="fieldHidden">
 						<textarea name="reason-other-details" id="reason-other-details" placeholder="<?php _e( 'Let me know why you are deactivating the plugin so I can improve it.' ); ?>"></textarea>
@@ -79,6 +81,9 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 			<input id="reason" type="hidden" value="">
 			<input id="details" type="hidden" value="">
 		</div>
+
+		<h4><?php _e( 'Have more feedback about the plugin? Don&rsquo;t hold back.' ); ?></h4>
+		<textarea name="additional-feedback" id="feedback"></textarea>
 
 		<?php
 		// Prepare response with a reason if any.
@@ -99,9 +104,13 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 
 			<input type="email" name="email" id="email" value="" placeholder="<?php _e( 'Please enter your email address' ); ?>" disabled="disabled">
 
-			<a href="<?php echo esc_attr( $deactivation_url ); ?>" class="button button-primary isDisabled" disabled id="send-deactivation"><?php _e( 'Send Feedback & Deactivate' ); ?></a>
-			<button class="cancel"><?php _e( 'Cancel' ); ?></button>
-			<a href="<?php echo esc_attr( $deactivation_url ); ?>" class="button button-secondary"><?php _e( 'Just Deactivate' ); ?></a>
+			<a href="<?php echo esc_attr( $deactivation_url ); ?>" class="button button-secondary skip-feedback"><?php _e( 'Skip & Deactivate' ); ?></a>
+
+			<div class="action-btns">
+				<span class="action-spinner"><img src="<?php echo admin_url( '/images/spinner.gif' ); ?>" alt=""></span>
+				<input type="submit" class="button button-secondary send-feedback isDisabled" id="send-deactivation" value="<?php _e( 'Send Feedback & Deactivate' ); ?>" disabled="disabled" />
+				<button class="button button-primary cancel"><?php _e( 'Cancel' ); ?></button>
+			</div>
 		</div>
 
 		<div class="what-will-be-sent"><a href="#"><?php _e( 'What will I be sending?' ); ?></a></div>
@@ -117,7 +126,9 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 		<input type="hidden" id="wp_admin_fb_modal_ajax_url" value="<?php echo admin_url( 'admin-ajax.php' ); ?>" />
 	</div>
 
+	</form>
+
 </div>
 
-<div class="wp-admin-fb-modal-overlay"></div>
+<div class="wp-admin-fb-modal-overlay <?php echo $plugin_slug; ?>"></div>
 <!-- End of WP Admin Feedback Modal -->

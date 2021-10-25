@@ -111,6 +111,30 @@ if ( ! class_exists( 'WP_Admin_FB_Modal_Example' ) ) {
 
 			$responses = array(
 				array(
+					'id'           => 'testing-plugin',
+					'value'        => __( 'Testing plugin' ),
+					'label'        => __( 'I was only testing the plugin.' ),
+					'hidden_field' => 'no',
+				),
+				array(
+					'id'           => 'broke-site',
+					'value'        => __( 'Broken site' ),
+					'label'        => __( 'The plugin broke my site.' ),
+					'hidden_field' => 'no',
+				),
+				array(
+					'id'           => 'suddenly-stopped-working',
+					'value'        => __( 'Suddenly stopped working' ),
+					'label'        => __( 'The plugin suddenly stopped working.' ),
+					'hidden_field' => 'no',
+				),
+				array(
+					'id'           => 'no-longer-need',
+					'value'        => __( 'No longer need plugin' ),
+					'label'        => __( 'I no longer need the plugin.' ),
+					'hidden_field' => 'no',
+				),
+				array(
 					'id'           => 'too-complicated',
 					'value'        => __( 'Too Complicated' ),
 					'label'        => sprintf( __( 'The plugin is %1$stoo complicated to configure.%2$s' ), '<strong>', '</strong>' ),
