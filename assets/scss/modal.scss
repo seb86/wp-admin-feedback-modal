@@ -3,13 +3,10 @@
 	border-radius: 3px;
 	color: #444;
 	height: auto;
-	left: 50%;
+	left: 0;
 	position: fixed;
-	top: 50%;
-	width: 600px;
-	-webkit-transform: translateX(-50%) translateY(-50%);
-	-ms-transform: translateX(-50%) translateY(-50%);
-	transform: translateX(-50%) translateY(-50%);
+	top: 0;
+	width: 100%;
 	z-index: 100000;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -19,8 +16,22 @@
 	transition: opacity 0.3s ease-in-out;
 	-webkit-transition: 0.3s ease-in-out;
 	opacity: 0;
-	overflow: clip;
+	overflow: scroll;
 	visibility: hidden;
+
+	@media screen and (max-width: 926px) and (max-height: 428px) {
+		position: relative;
+	}
+
+	@media screen and (min-width: 810px) {
+		left: 50%;
+		top: 50%;
+		max-width: 600px;
+		overflow: clip;
+		-webkit-transform: translateX(-50%) translateY(-50%);
+		-ms-transform: translateX(-50%) translateY(-50%);
+		transform: translateX(-50%) translateY(-50%);
+	}
 
 	&.active {
 		opacity: 1;
@@ -126,20 +137,63 @@
 				width: 100%;
 			}
 
+			@media screen and (max-width: 428px) {
+				.skip-feedback {
+					display: none;
+					clear: both;
+					text-align: center;
+				}
+
+				.skip-feedback,
+				.send-feedback,
+				.cancel {
+					width: 100%;
+				}
+
+				.cancel {
+					clear: both;
+					margin: 0;
+				}
+			}
+
 			.action-btns {
-				float: right;
+				@media screen and (min-width: 810px) {
+					float: right;
+				}
+				@media screen and (max-width: 428px) {
+					width: 100%;
+				}
+
+				.skip-feedback {
+					display: none;
+					opacity: 0;
+					visibility: hidden;
+
+					@media screen and (max-width: 428px) {
+						display: inherit;
+						opacity: 1;
+						visibility: visible;
+					}
+				}
 
 				.action-spinner {
 					display: none;
 
 					img {
 						margin-top: 3px;
+
+						@media screen and (max-width: 428px) {
+							margin-top: 10px;
+							margin-left: 1rem;
+							position: fixed;
+						}
 					}
 				}
 			}
 		}
 
 		div.what-will-be-sent {
+			clear: both;
 			padding: 14px;
 			text-align: center;
 		}
@@ -165,6 +219,10 @@
 				height: 220px;
 				opacity: 1;
 				visibility: visible;
+
+				@media screen and (max-width: 428px) {
+					height: 240px;
+				}
 			}
 
 			ul {
@@ -229,11 +287,17 @@
 		&:before {
 			font-size: 1.25rem;
 			line-height: 1;
+			padding: 0.6em;
 		}
 
 		&.close-whats-sent {
 			color: #fff;
 			float: right;
+
+			@media screen and (max-width: 428px) {
+				padding: 1rem;
+				margin-right: -12px;
+			}
 		}
 	}
 
@@ -281,6 +345,24 @@
 
 	.content {
 		padding: 8px 32px;
+
+		ul {
+			li {
+				label {
+					display: inline-grid;
+				}
+			}
+		}
+
+		@media screen and (max-height: 926px) {
+			ul {
+				font-size: 14px;
+				letter-spacing: 0.01rem;
+				margin: 0;
+				max-height: 360px;
+				overflow: auto;
+			}
+		}
 
 		#feedback {
 			box-sizing: border-box;

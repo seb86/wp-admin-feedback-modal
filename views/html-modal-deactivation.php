@@ -105,11 +105,12 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 
 			<input type="email" name="email" id="email" value="" placeholder="<?php _e( 'Please enter your email address' ); ?>" disabled="disabled">
 
-			<a href="<?php echo esc_attr( $deactivation_url ); ?>" class="button button-secondary skip-feedback"><?php _e( 'Skip & Deactivate' ); ?></a>
+			<a class="button button-secondary skip-feedback" href="<?php echo esc_attr( $deactivation_url ); ?>"><?php _e( 'Skip & Deactivate' ); ?></a>
 
 			<div class="action-btns">
 				<span class="action-spinner"><img src="<?php echo admin_url( '/images/spinner.gif' ); ?>" alt=""></span>
 				<input type="submit" class="button button-secondary send-feedback isDisabled" id="send-deactivation" value="<?php _e( 'Send Feedback & Deactivate' ); ?>" disabled="disabled" />
+				<a class="button button-secondary skip-feedback" href="<?php echo esc_attr( $deactivation_url ); ?>"><?php _e( 'Skip & Deactivate' ); ?></a>
 				<button class="button button-primary cancel"><?php _e( 'Cancel' ); ?></button>
 			</div>
 		</div>
