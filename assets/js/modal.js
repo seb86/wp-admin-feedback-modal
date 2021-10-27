@@ -17,7 +17,7 @@
 		});
 
 		// Close or cancel feedback.
-		$(document).on('click', '#wp-admin-fb-modal-deactivate-form .close, .deactivation-options .cancel', function (e) {
+		$(document).on('click', '#wp-admin-fb-modal-deactivate-form .close-form, .deactivation-options .cancel', function (e) {
 			console.log( 'Feedback modal closed!' );
 			e.preventDefault();
 			close_popup();
@@ -46,6 +46,8 @@
 			$(modal).removeClass('active');
 			$('#wp-admin-fb-modal-deactivate-form').trigger("reset");
 			$(".send-feedback").addClass('isDisabled');
+			$('.content-overlay', modal).removeClass('content-overlay-active');
+			$('.whats-sent').removeClass('active');
 		}
 
 		// Set selected reason.
@@ -146,7 +148,17 @@
 
 			var whatsSent = $('.whats-sent');
 
-			whatsSent.toggle();
+			$('.content-overlay', modal).toggleClass('content-overlay-active');
+			whatsSent.toggleClass('active');
+		});
+
+		// Close what's sent.
+		$(document).on('click', '.whats-sent .close-whats-sent', function (e) {
+			console.log( 'Whats sent closed!' );
+			e.preventDefault();
+
+			$('.content-overlay', modal).toggleClass('content-overlay-active');
+			$('.whats-sent').toggleClass('active');
 		});
 
 	});

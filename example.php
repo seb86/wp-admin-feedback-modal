@@ -123,10 +123,18 @@ if ( ! class_exists( 'WP_Admin_FB_Modal_Example' ) ) {
 					'hidden_field' => 'no',
 				),
 				array(
-					'id'           => 'suddenly-stopped-working',
-					'value'        => __( 'Suddenly stopped working' ),
-					'label'        => __( 'The plugin suddenly stopped working.' ),
-					'hidden_field' => 'no',
+					'id'                 => 'suddenly-stopped-working',
+					'value'              => __( 'Suddenly stopped working' ),
+					'label'              => __( 'The plugin suddenly stopped working.' ),
+					'hidden_field'       => 'yes',
+					'hidden_placeholder' => __( 'Could you tell us a bit more what stopped working?' ),
+				),
+				array(
+					'id'                 => 'looking-for-other',
+					'value'              => __( 'Not what I was looking' ),
+					'label'              => __( 'Looking for something else.' ),
+					'hidden_field'       => 'yes',
+					'hidden_placeholder' => __( 'Could you tell us a bit more?' ),
 				),
 				array(
 					'id'           => 'no-longer-need',
@@ -135,8 +143,15 @@ if ( ! class_exists( 'WP_Admin_FB_Modal_Example' ) ) {
 					'hidden_field' => 'no',
 				),
 				array(
+					'id'                 => 'missing-that-feature',
+					'value'              => __( 'Missing feature' ),
+					'label'              => __( 'Missing a specific feature.' ),
+					'hidden_field'       => 'yes',
+					'hidden_placeholder' => __( 'Could you tell us more about that feature?' ),
+				),
+				array(
 					'id'           => 'too-complicated',
-					'value'        => __( 'Too Complicated' ),
+					'value'        => __( 'Too complicated' ),
 					'label'        => sprintf( __( 'The plugin is %1$stoo complicated to configure.%2$s' ), '<strong>', '</strong>' ),
 					'hidden_field' => 'no',
 					'reason'       => array(
@@ -157,7 +172,7 @@ if ( ! class_exists( 'WP_Admin_FB_Modal_Example' ) ) {
 				),
 				array(
 					'id'                 => 'another-plugin',
-					'value'              => __( 'Another Plugin' ),
+					'value'              => __( 'Another plugin' ),
 					'label'              => __( 'I\'m using another plugin I find better.' ),
 					'hidden_field'       => 'yes',
 					'hidden_placeholder' => __( 'What is the name of this plugin?' ),

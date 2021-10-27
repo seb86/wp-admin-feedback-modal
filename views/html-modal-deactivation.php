@@ -44,7 +44,7 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 			<button class="return icon-arrow-left"><?php _e( 'Return' ); ?></button>
 			<h2><?php echo sprintf( __( 'Quick feedback about %s' ), $plugin_name ); ?></h2>
 		</div>
-		<button class="close icon-close"><?php _e( 'Close' ); ?></button>
+		<button class="close icon-close close-form"><?php _e( 'Close' ); ?></button>
 	</div>
 
 	<div class="content">
@@ -97,6 +97,7 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 		}
 		?>
 	</div>
+	<div class="content-overlay"></div>
 
 	<div class="footer">
 		<div class="deactivation-options">
@@ -116,11 +117,15 @@ $deactivation_url = wp_nonce_url( add_query_arg( array(
 		<div class="what-will-be-sent"><a href="#"><?php _e( 'What will I be sending?' ); ?></a></div>
 
 		<div class="whats-sent">
+			<button class="close icon-close close-whats-sent"><?php _e( 'Close' ); ?></button>
 			<p><?php _e( 'If you granted permission and provided an email address the following is sent.' ); ?></p>
 			<ul>
 				<li><?php _e( 'Your profile name and the email address you provided.' ); ?></li>
-				<li><?php _e( 'Your site url, WP version, PHP info, active plugins and theme.' ); ?></li>
+				<li><?php _e( 'Server environment details (php, mysql, server, WordPress versions).' ); ?></li>
+				<li><?php _e( 'Your site (name, url and language).' ); ?></li>
+				<li><?php _e( 'Number of active and inactive plugins.' ); ?></li>
 			</ul>
+			<p><?php _e( 'No sensitive data is tracked.' ); ?></p>
 		</div>
 
 		<input type="hidden" id="wp_admin_fb_modal_ajax_url" value="<?php echo admin_url( 'admin-ajax.php' ); ?>" />
